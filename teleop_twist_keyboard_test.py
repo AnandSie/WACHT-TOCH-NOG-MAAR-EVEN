@@ -113,9 +113,14 @@ if __name__=="__main__":
 					print msg
 				status = (status + 1) % 15
 			elif key in sinBindings.keys():
-				 rate = rospy.Rate(100)
-				for iCount in range(200):
-					th = sinBindings[key][0]
+				
+				for iCount in range(0,1000,1):
+					turn = math.sin(iCount/100)
+					twist = Twist()
+					twist.linear.x = x*speed; twist.linear.y = y*speed; twist.linear.z = z*speed;
+					twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = th*turn
+					pub.publish(twist)
+
 					
 			else:
 				x = 0
