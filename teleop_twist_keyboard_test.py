@@ -4,6 +4,7 @@
 #!/usr/bin/env python
 import roslib; roslib.load_manifest('teleop_twist_keyboard')
 import rospy
+import math
 
 from geometry_msgs.msg import Twist
 
@@ -64,7 +65,10 @@ speedBindings={
 		'e':(1,1.1),
 		'c':(1,.9),
 	      }
-
+sinBindings={
+		'a':(sin(iCount)),
+		's':(cos(iCount)),
+	      }
 def getKey():
 	tty.setraw(sys.stdin.fileno())
 	select.select([sys.stdin], [], [], 0)
@@ -108,6 +112,11 @@ if __name__=="__main__":
 				if (status == 14):
 					print msg
 				status = (status + 1) % 15
+			elif key in sinBindings.keys():
+				 rate = rospy.Rate(100)
+				for iCount in range(200):
+					th = sinBindings[key][0]
+					
 			else:
 				x = 0
 				y = 0
