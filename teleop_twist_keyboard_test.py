@@ -54,13 +54,13 @@ moveBindings = {
 		'b':(0,0,-1,0),
 	       }
 
-speedBindings={
-		'q':(1.1,1.1),
-		'z':(.9,.9),
-		'w':(1.1,1),
-		'x':(.9,1),
-		'e':(1,1.1),
-		'c':(1,.9),
+speedBindings={					#je wil dus hier ervoor zorgen dat +iets gaat als je op deze key drukt
+		'q':(.1,.1),
+		'z':(-.1,-.1),
+		'w':(.1,0),
+		'x':(-.1,0),
+		'e':(0,.1),
+		'c':(0,-.1),
 	      }
 sinBindings={
 		'a':(sin(iCount)),
@@ -102,8 +102,8 @@ if __name__=="__main__":
 				z = moveBindings[key][2]
 				th = moveBindings[key][3]
 			elif key in speedBindings.keys():
-				speed = speed * speedBindings[key][0]
-				turn = turn * speedBindings[key][1]
+				speed = speed + speedBindings[key][0] #je wil dus eig hier + iets hebben
+				turn = turn *+ speedBindings[key][1]
 
 				print vels(speed,turn)
 				if (status == 14):
